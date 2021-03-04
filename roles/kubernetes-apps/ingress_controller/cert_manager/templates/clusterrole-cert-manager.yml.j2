@@ -23,6 +23,15 @@ metadata:
     app.kubernetes.io/name: cainjector
   name: cert-manager-cainjector
 rules:
+# [NOTE-zw] https://github.com/jetstack/cert-manager/issues/3338#issuecomment-719129835
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - create
+  - update
 - apiGroups:
   - cert-manager.io
   resources:
