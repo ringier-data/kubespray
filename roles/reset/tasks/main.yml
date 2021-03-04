@@ -257,6 +257,8 @@
     - /etc/dnsmasq.d-available
     - /etc/etcd.env
     - /etc/calico
+    - /etc/NetworkManager/conf.d/calico.conf
+    - /etc/NetworkManager/conf.d/k8s.conf
     - /etc/weave.env
     - /opt/cni
     - /etc/dhcp/dhclient.d/zdnsupdate.sh
@@ -291,7 +293,6 @@
     - "{{ bin_dir }}/crictl"
     - "{{ bin_dir }}/netctl"
     - /var/lib/cni
-    - /etc/vault
     - /etc/openvswitch
     - /run/openvswitch
     - /var/lib/kube-router
