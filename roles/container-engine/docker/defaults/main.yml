@@ -1,5 +1,6 @@
 ---
-docker_version: '19.03'
+# NOTE-zw: move the variable definition to inventory/group_vars/all/docker.yml
+# docker_version: 'latest'
 docker_cli_version: "{{ docker_version }}"
 
 docker_package_info:
