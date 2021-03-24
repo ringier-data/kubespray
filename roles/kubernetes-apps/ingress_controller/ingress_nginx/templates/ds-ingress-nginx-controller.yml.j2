@@ -83,14 +83,25 @@ spec:
             - name: http
               containerPort: 80
               hostPort: {{ ingress_nginx_insecure_port }}
-            - name: https
-              containerPort: 443
-              hostPort: {{ ingress_nginx_secure_port }}
-            - name: metrics
-              containerPort: 10254
-{% if not ingress_nginx_host_network %}
-              hostPort: {{ ingress_nginx_metrics_port }}
-{% endif %}
+# NOTE-zw: SSL termination happens at the Nginx reverse proxy outside of this Kubernetes cluster
+#            - name: https
+#              containerPort: 443
+#              hostPort: {{ ingress_nginx_secure_port }}
+# NOTE-zw: No need to let Prometheus scrape the status of this ingress-nginx
+#            - name: metrics
+#              containerPort: 10254
+#{% if not ingress_nginx_host_network %}
+#              hostPort: {{ ingress_nginx_metrics_port }}
+#{% endif %}
+          # NOTE-zw: we do not need this ingress controller to be so powerful. It is not mission critical at all.
+          # Limit the resource consumption for the other payloads
+          resources:
+            limits:
+              cpu: 100m
+              memory: 90Mi
+            requests:
+              cpu: 100m
+              memory: 90Mi
           livenessProbe:
             failureThreshold: 3
             httpGet:
