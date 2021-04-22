@@ -125,6 +125,7 @@
       assemble:
         src: "{{ local_release_dir }}/calico-{{ calico_version }}-kdd-crds"
         dest: "{{ kube_config_dir }}/kdd-crds.yml"
+        delimiter: "---\n"
         regexp: ".*\\.yaml"
         remote_src: true
 
@@ -207,6 +208,7 @@
           "name": "default",
       },
       "spec": {
+          "listenPort": {{ calico_bgp_listen_port }},
           "logSeverityScreen": "Info",
           {% if not calico_no_global_as_num|default(false) %}"asNumber": {{ global_as_num }},{% endif %}
           "nodeToNodeMeshEnabled": {{ nodeToNodeMeshEnabled|default('true') }} ,
