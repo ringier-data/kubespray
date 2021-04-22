@@ -97,10 +97,10 @@ spec:
           # Limit the resource consumption for the other payloads
           resources:
             limits:
-              cpu: 100m
-              memory: 90Mi
+              cpu: 1000m
+              memory: 1000Mi
             requests:
-              cpu: 100m
+              cpu: 200m
               memory: 90Mi
           livenessProbe:
             failureThreshold: 3
